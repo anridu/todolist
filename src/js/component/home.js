@@ -5,21 +5,13 @@ import PropTypes from "prop-types";
 import rigoImage from "../../img/rigo-baby.jpg";
 
 let TaskList = props => {
-	const [items, setItems] = useState([
-		{ id: 1, name: "task 1" },
-		{ id: 2, name: "task 2" }
-	]);
+	const [items, setItems] = useState([]);
 	let [inputValue, setInputValue] = useState("");
 
 	useEffect(
 		function(element) {
 			if (inputValue != "") {
-				setItems(
-					items.concat({
-						id: items[items.length - 1].id + 1,
-						name: inputValue
-					})
-				);
+				setItems(items.concat(inputValue));
 			}
 		},
 		[inputValue]
@@ -34,7 +26,7 @@ let TaskList = props => {
 			/>
 			<ul>
 				{items.map((item, index) => (
-					<li key={item.id}>{item.name}</li>
+					<li key={index.id}>{item}</li>
 				))}
 			</ul>
 		</div>
