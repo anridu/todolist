@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
@@ -8,9 +9,25 @@ let TaskList = props => {
 		{ id: 1, name: "task 1" },
 		{ id: 2, name: "task 2" }
 	]);
+	let [inputValue, setInputValue] = useState("");
+
+	useEffect(
+		function() {
+			items.push({
+				id: items[items.length - 1].id + 1,
+				name: inputValue
+			});
+		},
+		[inputValue]
+	);
 
 	return (
 		<div>
+			<input
+				value={inputValue}
+				placeholder={"Fill with the new task"}
+				onChange={e => setInputValue(e.target.value)}
+			/>
 			<ul>
 				{items.map((item, index) => (
 					<li key={item.id}>{item.name}</li>
@@ -22,17 +39,14 @@ let TaskList = props => {
 
 //create your first component
 export function Home() {
-	let [inputValue, setInputValue] = useState("");
-
 	return (
 		<div className="text-center mt-5">
 			<h1>Hello Rigo!</h1>
 			<p>
 				<img src={rigoImage} />
 			</p>
-			<input value={inputValue} placeholder={"Fill with the new task"} />
 
-			<TaskList name={"Angel"} />
+			<TaskList />
 			<p>
 				Made by{" "}
 				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
@@ -41,3 +55,6 @@ export function Home() {
 		</div>
 	);
 }
+TaskList.propTypes = {
+	newElement: PropTypes.string
+};
