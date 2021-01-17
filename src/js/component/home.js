@@ -12,11 +12,15 @@ let TaskList = props => {
 	let [inputValue, setInputValue] = useState("");
 
 	useEffect(
-		function() {
-			items.push({
-				id: items[items.length - 1].id + 1,
-				name: inputValue
-			});
+		function(element) {
+			if (inputValue != "") {
+				setItems(
+					items.concat({
+						id: items[items.length - 1].id + 1,
+						name: inputValue
+					})
+				);
+			}
 		},
 		[inputValue]
 	);
