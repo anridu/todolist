@@ -5,28 +5,38 @@ import PropTypes from "prop-types";
 import rigoImage from "../../img/rigo-baby.jpg";
 
 let TaskList = props => {
-	const [items, setItems] = useState([]);
+	const [items, setItems] = useState(["task1", "task2"]);
 	let [inputValue, setInputValue] = useState("");
 
-	useEffect(
-		function(element) {
-			if (inputValue != "") {
-				setItems(items.concat(inputValue));
-			}
-		},
-		[inputValue]
-	);
+	// useEffect(
+	// 	// function(element) {
+	// 	// 	if (inputValue != "") {
+	// 	// 		);
+	// 	// 	}
+	// 	//},
+	// 	{},
+	// 	[items]
+	// );
+
+	const enviarFormulario = event => {
+		event.preventDefault();
+		setItems(items.concat(inputValue));
+		setInputValue("");
+		//console.log("estoy dentro de la funcion");
+	};
 
 	return (
 		<div>
-			<input
-				value={inputValue}
-				placeholder={"Fill with the new task"}
-				onChange={e => setInputValue(e.target.value)}
-			/>
+			<form onSubmit={event => enviarFormulario(event)}>
+				<input
+					value={inputValue}
+					placeholder={"Fill with the new task"}
+					onChange={e => setInputValue(e.target.value)}
+				/>
+			</form>
 			<ul>
 				{items.map((item, index) => (
-					<li key={index.id}>{item}</li>
+					<li key={index}>{item}</li>
 				))}
 			</ul>
 		</div>
