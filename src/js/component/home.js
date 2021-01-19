@@ -20,9 +20,20 @@ let TaskList = props => {
 
 	const enviarFormulario = event => {
 		event.preventDefault();
-		setItems(items.concat(inputValue));
-		setInputValue("");
+		if (inputValue !== "") {
+			setItems(items.concat(inputValue));
+			setInputValue("");
+		}
 		//console.log("estoy dentro de la funcion");
+	};
+	const removeItem = event => {
+		let liSelected = event.target.parentElement;
+		console.log(event.target.parentElement);
+		let words = liSelected.innerText.split(" ");
+		let value = words[0];
+		setItems(items.filter(item => item !== value));
+		//setItems(items.splice(event, 3));
+		//setInputValue("");
 	};
 
 	return (
@@ -34,9 +45,13 @@ let TaskList = props => {
 					onChange={e => setInputValue(e.target.value)}
 				/>
 			</form>
+
 			<ul>
 				{items.map((item, index) => (
-					<li key={index}>{item}</li>
+					<li key={index}>
+						{item}{" "}
+						<span onClick={event => removeItem(event)}>X</span>
+					</li>
 				))}
 			</ul>
 		</div>
