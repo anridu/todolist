@@ -8,16 +8,6 @@ let TaskList = props => {
 	const [items, setItems] = useState(["task1", "task2"]);
 	let [inputValue, setInputValue] = useState("");
 
-	// useEffect(
-	// 	// function(element) {
-	// 	// 	if (inputValue != "") {
-	// 	// 		);
-	// 	// 	}
-	// 	//},
-	// 	{},
-	// 	[items]
-	// );
-
 	const enviarFormulario = event => {
 		event.preventDefault();
 		if (inputValue !== "") {
